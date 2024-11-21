@@ -10,6 +10,12 @@ div.home-container {
 	min-height: 100vh;
 }
 
+div {
+	max-width: 70em;
+	position: auto;
+	margin: auto;
+}
+
 div.container { 
 	position: relative;
 	min-height: 100vh;
