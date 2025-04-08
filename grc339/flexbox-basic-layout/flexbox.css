@@ -36,7 +36,7 @@ article {
 }
 
 aside {
-	flex: 1 0 10em;
+	flex: 1 0 15em;
 	display: flex;
 	flex-direction: column;
 	gap: 1em;
