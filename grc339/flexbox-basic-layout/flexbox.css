@@ -27,7 +27,11 @@ figure {
 }
 
 h2 {
-	margin-top: 2em;
+	padding-top: 2em;
+}
+
+ol {
+	padding-left: 0em;
 }
 
 header {
