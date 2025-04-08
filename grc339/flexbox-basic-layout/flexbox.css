@@ -19,6 +19,7 @@ div.container {
 	gap: 1em;
 	max-width: 60em;
 	margin: auto;
+	margin-top: 3em
 }
 
 figure {
