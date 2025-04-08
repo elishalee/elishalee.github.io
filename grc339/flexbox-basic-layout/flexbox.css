@@ -26,6 +26,10 @@ figure {
 	margin: 0em;
 }
 
+h2 {
+	margin-top: 2em;
+}
+
 header {
 	flex: 1 0 100%;
 }
