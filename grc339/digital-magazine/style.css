@@ -12,17 +12,13 @@ h1 {
     padding: 1em 0.5em;
 }
 
-div {
+div.container, div.home-container {
     margin: auto;
-    max-width: 45em;
+    max-width: 40em;
 }
 
-section.margin {
-    margin: 0.3em 0em 1em;
-}
 
-header ul li {
-    display: inline;
+nav ul li {
     margin-left: 0.5em;
     list-style: none;
     font-family: sans-serif;
@@ -32,50 +28,81 @@ header ul li {
     text-align: left;
 }
 
+nav ul {
+    margin-bottom: 1em;
+}
+
 a {
     text-decoration: none;
 }
 
-figure {
-    padding-top: 1.5em;
-    left: 0em;
-}
-
-figure.mainstoryimage {
-    margin-bottom: 3em;
-}
 
 figcaption {
     font-family: sans-serif;
     font-style: italic;
     color: #848485;
-    margin: 0.7em;
+    padding: 0em 0.5em;
 }    
 
-h2 {
+section.maintitlestory a figure {
+    margin: 0;
+}
+
+section.maintitlestory a h2 {
+    padding-left: 0.5em;
     font-family: serif;
     font-weight: bold;
     font-size: 2em;
     color: #5C7696;
 }
 
-h2.secondary {
+section.secondarystory a h2 {
+    font-family: serif;
+    font-weight: bold;
     font-size: 1.5em;
+    color: #5C7696;
+    padding-left: 0.5em;
 }
 
-h2.tertiary {
+section.tertiarystory a h2 {
+    font-family: serif;
+    font-weight: bold;
     font-size: 1.2em;
-    border-top: 1px solid #111122;
+    color: #5C7696;
     padding-top: 0.5em;
+    border-top: 1px solid #111122;
 }
 
-section.tertiarystory {
-    margin: 2em 0em;
+section.maintitlestory a p {
+    padding-left: 0.7em;
+    margin-bottom: 0.5em;
 }
 
-h2.aside {
+section.secondarystory a p {
+    padding-left: 0.7em;
+    margin-bottom: 0.5em;
+}
+
+
+aside h2 {
     font-size: 1.2em;
+    font-family: serif;
+    font-weight: bold;
+    color: #5C7696;
 }
+
+article h2 {
+    font-family: serif;
+    font-weight: bold;
+    font-size: 1.5em;
+    color: #5C7696;
+    padding-left: 0.5em;
+}
+
+article p {
+    padding: 0.5em 0.7em;
+}
+
 
 p {
     font-family: sans-serif;
@@ -85,26 +112,140 @@ p {
 
 aside {
     background-color: #cdcafe;
-    padding: 0em 1em 2em;
-    margin-top: 2em;
+    padding: 1em 1em 2em;
+    margin-top: 1em;
 }
 
 footer {
     background-color: #5C7696;
     padding: 1em 0.2em 1em;
+    box-sizing: border-box;
 }
 
 p.footer {
     color: #fefef9;
 }
 
-@media screen and (max-width: 35em) {
-    header ul li {
-        display: block;
-        text-align: left;
-    }
-
-    section.margin {
-        margin: 0.3em 0.5em 1em;
+@media only screen and (min-width: 40em) {
+    nav ul li {
+        display: inline;
+        margin-bottom: 1em;
     }
 }
+
+@media only screen and (min-width: 60em) {
+    div.home-container {
+        max-width: 80em;
+    padding: 0 1em;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-gap: 1em;
+    }
+
+    div.container {
+        max-width: 60em;
+    padding: 0 1em;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-gap: 1em;
+    } 
+
+    header, footer {
+        grid-column: 1/3
+    }
+
+    div.home-container main {
+        display: grid;
+        grid-template-columns:repeat(3, 1fr);
+        grid-gap: 1em;
+    }
+
+    section.maintitlestory {
+        grid-column: 2/4;
+        grid-row: 1/3; 
+        display: flex;
+    }
+
+    div.home-container aside {
+        background: none;
+        padding: 0;
+        margin-top: 0;
+    }
+
+    div.container aside {
+        margin-top: 0;
+    } 
+
+    section.maintitlestory a {
+        flex: 1 0 12em;
+        display: flex;
+        flex-direction: column;
+    }
+
+    section.maintitlestory a figure {
+        flex: 1 0 12em;
+        display: flex;
+    }
+
+    section.maintitlestory a figure img {
+        object-fit: cover;
+    }
+
+    section.maintitlestory a h2 {
+        flex: 0 0 1em;
+    }
+
+    section.maintitlestory a p  {
+        flex: 0 0 4em;
+    }
+
+
+    section.secondarystory {
+        display: flex;
+    }
+
+    section.secondarystory a {
+        flex: 1 0 12em;
+        display: flex;
+        flex-direction: column;
+    }
+
+    section.secondarystory a figure {
+        flex: 1 0 12em;
+        display: flex;
+    }
+
+    section.secondarystory a figure img {
+        object-fit: cover;
+    }
+
+    section.secondary a h2 {
+        flex: 0 0 1em;
+    }
+
+    section.secondarystory a p  {
+        flex: 0 0 4em;
+    }
+
+    section.tertiarystory {
+        margin: 0;
+        margin-bottom: 1em;
+    }
+
+    aside figure {
+        padding-top: 1em;
+    }
+
+    article h2 {
+        padding-left: 0em;
+    }
+
+    article p {
+        padding-left: 0em;
+    }
+
+    figcaption {
+        padding: 0;
+    }
+
+    }
