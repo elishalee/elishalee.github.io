@@ -18,8 +18,14 @@ div.container, div.home-container {
     background-color: #F4FFFD;
 }
 
+div.photogallery {
+    margin: auto;
+    max-width: 60em;
+}
+
 body {
     background-color: #F4FFFD;
+    box-sizing: border-box;
 }
 
 
@@ -147,7 +153,168 @@ footer {
 
 p.footer {
     color: #fefbec;
+    margin-bottom: 1em;
 }
+
+p.newsletter a {
+    color: #fefbec;
+    font-weight: 700;
+}
+
+p.newsletter a:hover {
+    color: #ED254E;
+    font-weight: 700;
+}
+
+div.gallery {
+    margin: auto;
+    max-width: 60em;
+}
+
+section.gallery {
+    position: relative;
+    overflow: hidden;
+    padding-bottom: calc(67% + 3em);
+}
+
+figure.photosforgallery {
+    margin: 0;
+    width: calc(100%-2em);
+    position: absolute;
+    opacity: 0;
+    transition: opacity .5s;
+}
+
+nav.gallerynav {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-gap: 0.2em;
+}
+
+input:nth-of-type(1):checked ~ section.gallery figure:nth-of-type(1),
+input:nth-of-type(2):checked ~ section.gallery figure:nth-of-type(2),
+input:nth-of-type(3):checked ~ section.gallery figure:nth-of-type(3),
+input:nth-of-type(4):checked ~ section.gallery figure:nth-of-type(4),
+input:nth-of-type(5):checked ~ section.gallery figure:nth-of-type(5),
+input:nth-of-type(6):checked ~ section.gallery figure:nth-of-type(6),
+input:nth-of-type(7):checked ~ section.gallery figure:nth-of-type(7),
+input:nth-of-type(8):checked ~ section.gallery figure:nth-of-type(8){
+    opacity: 1;
+}
+
+div.gallery input {
+    display: none;
+}
+
+div.photogallery main {
+    margin: 2em 0em 2em 0em;;
+}
+
+div.newsletter-container {
+    max-width: 40em;
+    margin: auto;
+}
+
+ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+section.newsletter ul li {
+	display: flex;
+	flex-wrap: wrap;
+    font-family: 'loos-normal', sans-serif;
+    font-weight: 400;
+    color: #011936;
+}
+
+section.newsletter ul li label {
+	flex: 1 0 15em;
+}
+
+section.newsletter ul li input[type="text"],
+section ul li input[type="email"],
+section ul li input[type="tel"],
+section ul li select {
+	margin-bottom: 1em;
+	flex: 0 0 30em;
+	box-sizing: border-box;
+}
+
+section.newsletter h2 {
+	margin: 2em 0em 2em 0em;
+    font-family: 'obviously-extended', sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    text-transform: uppercase;
+    font-size: 2em;
+    color: #ED254E;
+}
+
+section.preferred-newsletter {
+    font-family: 'loos-normal', sans-serif;
+    font-weight: 400;
+    color: #011936;
+    margin-top: 2em;
+}
+
+section.method {
+    margin: 2em 0em 2em;
+}
+
+section.method ul {
+	display: flex;
+	flex-wrap: wrap;
+    margin-top: 1em;
+}
+
+section.method ul li {
+	flex: 1 0 15em;
+}
+
+section.button {
+    background: #eee;
+    padding: 1em;
+    margin-bottom: 1em;
+}
+
+section.button p {
+	margin-top: 0;
+}
+
+button[type="submit"] {
+	background-color: #ffffff;
+	color: #222;
+	border: 1px solid #d6d6d6;
+	border-radius: 5px; /* fully rounded */
+}	
+
+
+textarea {
+	box-sizing: border-box;
+	display: block;
+	width: 100%;
+	height: 6em;
+	background: #fcfcfc;
+	border: 1px solid #e8e8e8;
+	padding: 0.4em;
+	font-family: sans-serif;
+	color: #777;
+    margin: 1em 0em 2em 0em;
+	}
+
+
+
+div.gallery h2 {
+    padding-left: 0.3em;
+    font-family: 'obviously-extended', sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    text-transform: uppercase;
+    font-size: 2em;
+    color: #ED254E;
+}
+
 
 @media only screen and (min-width: 40em) {
     nav ul li {
@@ -156,10 +323,10 @@ p.footer {
     }
 }
 
+
 @media only screen and (min-width: 60em) {
     div.home-container {
         max-width: 80em;
-    padding: 0 1em;
     display: grid;
     grid-template-columns: 3fr 1fr;
     grid-gap: 1em;
@@ -167,7 +334,6 @@ p.footer {
 
     div.container {
         max-width: 60em;
-    padding: 0 1em;
     display: grid;
     grid-template-columns: 3fr 1fr;
     grid-gap: 1em;
