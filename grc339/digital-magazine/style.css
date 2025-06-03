@@ -30,7 +30,7 @@ body {
 
 
 nav ul li {
-    margin-left: 0.5em;
+    margin-left: 1em;
     list-style: none;
     font-family: 'obviously', sans-serif;
     font-weight: 700;
@@ -443,3 +443,48 @@ div.gallery h2 {
     }
 
     }
+
+@media screen and (prefers-color-scheme: dark) {
+   body, div.container, div.home-container {
+    background-color: #011936;
+   }
+
+   aside {
+    background-color: #03418C;
+   }
+
+   p, figcaption {
+    color: #F4FFFD;
+   }
+
+  section.maintitlestory a h2, section.secondarystory a h2, section.tertiarystory a h2, aside h2, article h2, div.gallery h2, section.newsletter h2 {
+    color: #ff5275;
+   }
+
+   nav ul li a, section.newsletter ul li, section.preferred-newsletter  {
+    color: #F4FFFD;
+   }
+   
+   footer {
+    border-top: 1px solid #EBFFFB;
+   }
+   
+   p.newsletter a:hover {
+    color: #ff5275
+}
+
+    section.tertiarystory a h2 {
+        border-top: 1px solid #F4FFFD;
+    }
+
+    h1 {
+        background-image: url("poppygologoDARK.svg");
+        background-repeat: no-repeat;  
+        background-size: contain;  
+    }
+
+    h1 img {
+        opacity: 0;
+    }
+
+}
