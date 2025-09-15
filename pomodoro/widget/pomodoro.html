@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pomodoro</title>
+  <link rel="stylesheet" href="https://use.typekit.net/kgc7djk.css">
+
+  <style>
+    :root {
+      --text: #566a93;
+      --accent: #e0718d;
+      --border: #4B5563;
+      --active: #7678f2;
+    }
+
+    body {
+      background: transparent;
+      font-family: 'century-gothic', sans-serif;
+      font-weight: 600;
+      font-style: normal;
+      color: var(--text);
+      margin: 0;
+      padding: 0;
+    }
+
+    .pomodoro {
+      background-color: transparent;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      min-width: 200px;
+      text-align: center;
+    }
+
+    .title {
+      font-family: "kepler-std-subhead", serif;
+      font-weight: 500;
+      font-style: italic;
+      text-transform: uppercase;
+      font-size: 30px;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .time {
+      font-family: "kepler-std-condensed", serif;
+      font-weight: 400;
+      font-style: italic;
+      font-size: 40px;
+      margin: 10px 0;
+      font-weight: bold;
+    }
+
+    .controls {
+      margin: 0.5em;
+    }
+
+    .controls button {
+      font-size: 20px;
+      padding: 5px 10px;
+      margin: 0.5em;
+      border: 1px solid var(--border);
+      border-radius: 90%;
+      background: transparent;
+      color: var(--text);
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .controls button:active {
+      background: var(--active);
+      color: white;
+      border-color: var(--active);
+    }
+
+    .inputs {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+
+    .input-box {
+      text-align: center;
+      flex: 1;
+    }
+
+    .input-box h4 {
+      margin: 0 0 4px;
+      font-size: 15px;
+      color: var(--accent);
+    }
+
+    .input-box input {
+      width: 36px;
+      padding: 0.3em 0.5em;
+      text-align: center;
+      border: 1px solid var(--border);
+      border-radius: 1em;
+      background: transparent;
+      color: var(--text);
+      font-size: 20px;
+    }
+
+    input::-webkit-inner-spin-button,
+    input::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    .status-label {
+      font-size: 12px;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="pomodoro">
+    <div class="title">Pomodoro</div>
+    <div class="status-label" id="statusLabel">Work</div>
+    <div class="time" id="time">25:00</div>
+
+    <div class="controls">
+      <button id="startPauseBtn">▶</button>
+      <button id="resetBtn">⟲</button>
+      <button id="loopToggleBtn">🔁</button>
+    </div>
+
+    <div class="inputs">
+      <div class="input-box">
+        <h4>Work (min)</h4>
+        <input type="number" id="session-input" min="1" value="25">
+      </div>
+      <div class="input-box">
+        <h4>Rest (min)</h4>
+        <input type="number" id="rest-input" min="1" value="5">
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let isRunning = false;
+    let isSession = true;
+    let loopMode = true;
+
+    let sessionLength = 25;
+    let restLength = 5;
+    let timeLeft = sessionLength * 60;
+    let timer;
+
+    const timeDisplay = document.getElementById("time");
+    const startPauseBtn = document.getElementById("startPauseBtn");
+    const resetBtn = document.getElementById("resetBtn");
+    const loopToggleBtn = document.getElementById("loopToggleBtn");
+    const statusLabel = document.getElementById("statusLabel");
+
+    const sessionInput = document.getElementById("session-input");
+    const restInput = document.getElementById("rest-input");
+
+    function updateTimeDisplay() {
+      const min = String(Math.floor(timeLeft / 60)).padStart(2, '0');
+      const sec = String(timeLeft % 60).padStart(2, '0');
+      timeDisplay.textContent = `${min}:${sec}`;
+    }
+
+    function toggleInputs(disabled) {
+      sessionInput.disabled = disabled;
+      restInput.disabled = disabled;
+    }
+
+    function switchMode() {
+      isSession = !isSession;
+      statusLabel.textContent = isSession ? "Work" : "Rest";
+      timeLeft = (isSession ? sessionLength : restLength) * 60;
+      updateTimeDisplay();
+    }
+
+    function toggleTimer() {
+      if (isRunning) {
+        clearInterval(timer);
+        startPauseBtn.textContent = "▶";
+        toggleInputs(false);
+      } else {
+        toggleInputs(true);
+        timer = setInterval(() => {
+          timeLeft--;
+          updateTimeDisplay();
+          if (timeLeft <= 0) {
+            if (loopMode) {
+              switchMode();
+            } else {
+              clearInterval(timer);
+              isRunning = false;
+              startPauseBtn.textContent = "▶";
+              toggleInputs(false);
+            }
+          }
+        }, 1000);
+        startPauseBtn.textContent = "⏸";
+      }
+      isRunning = !isRunning;
+    }
+
+    function resetTimer() {
+      clearInterval(timer);
+      isRunning = false;
+      isSession = true;
+      sessionLength = Math.max(1, parseInt(sessionInput.value) || 1);
+      restLength = Math.max(1, parseInt(restInput.value) || 1);
+      timeLeft = sessionLength * 60;
+      statusLabel.textContent = "Work";
+      updateTimeDisplay();
+      startPauseBtn.textContent = "▶";
+      toggleInputs(false);
+    }
+
+    function updateLengths() {
+      if (!isRunning) {
+        sessionLength = Math.max(1, parseInt(sessionInput.value) || 1);
+        restLength = Math.max(1, parseInt(restInput.value) || 1);
+        timeLeft = (isSession ? sessionLength : restLength) * 60;
+        updateTimeDisplay();
+      }
+    }
+
+    function toggleLoop() {
+      loopMode = !loopMode;
+      loopToggleBtn.textContent = loopMode ? "🔁" : "⏹️";
+    }
+
+    sessionInput.addEventListener("change", updateLengths);
+    restInput.addEventListener("change", updateLengths);
+    startPauseBtn.onclick = toggleTimer;
+    resetBtn.onclick = resetTimer;
+    loopToggleBtn.onclick = toggleLoop;
+
+    updateTimeDisplay();
+  </script>
+
+</body>
+</html>
